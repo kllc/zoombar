@@ -1,13 +1,3 @@
-
-SELECT * FROM `member` AS b,
-(SELECT * FROM `media` ORDER BY `number`) AS d,
-(SELECT id,MAX(`number`) AS n FROM `media` GROUP BY id) AS md
-WHERE b.id = d.id
-AND   d.id = md.id
-AND   d.`number` = md.n
-ORDER BY b.`rank`
-
-
 CREATE TABLE 
 `media` ( `id` CHAR(64) NOT NULL, 
 `number` INT NOT NULL AUTO_INCREMENT, 
@@ -34,25 +24,3 @@ CREATE TABLE
 `extension_fee` CHAR(64) CHARACTER SET utf8 COLLATE utf8_general_ci ,
 `extension_fee_id` CHAR(64) CHARACTER SET utf8 COLLATE utf8_general_ci, PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
-
-CREATE TABLE 
-`date` ( `id` CHAR(64)  NOT NULL, 
-`date` DATE , 
-`time` TIME , 
-`zoom_id` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci
-) ENGINE = InnoDB;
-
-
-
-
-
-
-
---直近７日
-select
-date_format(date_add(DATE_SUB(CURRENT_DATE(), INTERVAL 1 DAY), interval td.generate_series day), '%Y-%m-%d') as d
-from
-(
-SELECT 0 generate_series FROM DUAL WHERE (@num:=1-1)*0 UNION ALL
-SELECT @num:=@num+1 FROM `information_schema`.COLUMNS LIMIT 7
-) as td
