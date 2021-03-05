@@ -1,5 +1,8 @@
 # zoombar
 
+### 本番環境
+- https://zoombar.net
+
 ### ダウンロード
 `git clone https://github.com/kllc/zoombar.git`
 
