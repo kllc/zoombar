@@ -5,7 +5,8 @@ CREATE TABLE
 `fname` CHAR(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL , 
 `extension` CHAR(64)  CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL , 
 `raw_data` LONGBLOB NOT NULL,
-KEY (`number`)) ENGINE = InnoDB
+KEY (`number`)) ENGINE = InnoDB;
+
 
 
 CREATE TABLE 
