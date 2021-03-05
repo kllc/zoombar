@@ -1,0 +1,307 @@
+<?php include('header.php');?>
+<?php include('mysql.php');?>
+<?php include('post.php');?>
+<?php include('select.php');?>
+
+<script>
+function copy(){
+    $('#url').select();
+    document.execCommand('copy');
+    alert('コピーしました');
+}
+function kubun(){
+    if ($('input[name="kubun"]:checked').val() == "room"){
+        $('#address').hide();
+        $('#zoom_url').show();
+    } else{
+        $('#address').show();
+        $('#zoom_url').hide();
+    }
+}
+$(()=>{
+    if("<?php echo($_GET['id']) ?>"!="<?php echo($id)?>"){
+        $('#img').hide();
+        $('#urlsec').hide();
+        $('#del').hide();
+        $('#title01').text("新規登録");
+    }
+    $('input[name="kubun"]').change(function(){kubun()});
+    kubun();
+    $('#url').val($(location).attr('href'));
+    $('#delform').submit(()=>{
+        if(!confirm('削除しますか？')){
+            return false;
+        }
+    });
+    $('#signup').submit(()=>{
+        if($('input[name="email"]').val()==''||$('input[name="name"]').val()==''){
+            alert('お名前,Ｅメールは必須入力です');
+            return false;
+        }
+    });
+    $('form').attr('action', $(location).attr('href'));
+    $('input[type=file]').change(function(){
+        //サイズ計算
+        var total_size = 0;
+        $('input[type=file]').each(function(){
+            if($(this).val()){
+                var file = $(this).prop('files')[0]; // ※1
+                total_size = total_size + file.size;
+            }
+        });
+        //1メガを越えた場合はアラート表示
+        if(1048576 < total_size){
+            alert('画像は1メガまでとしてください');
+            $(this).val('');
+        }
+    });
+});
+</script>
+
+<script src="https://www.google.com/recaptcha/api.js?render=6LdnlXEaAAAAAB2et0HK-tScDvvJRNwZPOn-m-hc"></script>
+<script>
+    grecaptcha.ready(function () {
+        grecaptcha.execute('6LdnlXEaAAAAAB2et0HK-tScDvvJRNwZPOn-m-hc', {action: 'homepage'}).then(function(token) {
+            var recaptchaResponse = document.getElementById('recaptchaResponse');
+            recaptchaResponse.value = token;
+        });
+    });
+</script>
+
+<div id="contents" class="inner">
+<div id="main">
+
+<section>
+
+<h2>情報登録／更新</h2>
+<div id="urlsec">
+    <h3>登録データ更新用URL</h3>
+    <p><strong class="color1">登録データ更新用のURLは以下の通りです。</strong></p>
+    <p><input id="url" style="width:80%;padding: 10px;margin-bottom: 10px;"><br>
+    <input class="btn" type="button" onclick="copy()" value="クリップボードにコピー"></p>
+</div>
+<div id="del"">
+    <h3>データ表示・非表示・削除</h3>
+    <p><strong class="color1">サイトへの表示・非表示を切り替えます。</strong></p>
+    <p>現在は　<?php if($rank==0)echo('非'); ?>表示　です。</p>
+    <form action="signup.html?id=<?php echo($id) ?>&pw=<?php echo(hash("sha256", $id.$solt))?>" enctype="multipart/form-data" method="post">
+        <p>
+        <input class="btn" type="submit" name="del" value="非表示">
+        <input class="btn" type="submit" name="del" value="表示">
+        </p>
+    </form>
+    <p><strong class="color1">このデータを削除します。</strong></p>
+    <form id="delform" action="signup.html?id=<?php echo($id) ?>&pw=<?php echo(hash("sha256", $id.$solt))?>" enctype="multipart/form-data" method="post">
+        <p>
+            <input class="btn" type="submit" name="del" value="削除">
+        </p>
+    </form>
+</div>
+<h3 id="title01">登録データ更新</h3>
+<form id="signup" action="signup.html?id=<?php echo($id) ?>&pw=<?php echo(hash("sha256", $id.$solt))?>" enctype="multipart/form-data" method="post">
+    <table class="ta1">
+        <tr>
+            <th>店or個人</th>
+            <td>
+                <?php
+                    if ($kubun == 'b'){
+                        echo('<input type="radio" name="kubun" value="bar" checked="checked">BAR　');
+                        echo('<input type="radio" name="kubun" value="room">MEMBER');
+                    } else{
+                        echo('<input type="radio" name="kubun" value="bar">BAR　');
+                        echo('<input type="radio" name="kubun" value="room" checked="checked">MEMBER');    
+                    }
+                ?>
+            </td>
+        </tr>
+        <tr>
+            <th>お名前</th>
+            <td><input type="text" name="name" style="width:90%;height:30px"value="<?php echo($name) ?>"></td>
+        </tr>
+        <tr>
+            <th>コメント<br>（画像下）</th>
+            <td><input type="text" name="comment_small" style="width:90%;height:30px" value="<?php echo($comment_small) ?>"></td>
+        </tr>
+        <tr>
+            <th>コメント<br>（ページ）</th>
+            <td><textarea name="comment_large" cols="30" rows="10" style="width:90%;"><?php echo($comment_large) ?></textarea></td>
+        </tr>
+        <tr>
+            <th>Eメール<br>(非公開)</th>
+            <td><input type="text" name="email" style="width:90%;height:30px" value="<?php echo($email) ?>"></td>
+        </tr>
+        <tr>
+            <th>チャージ料金</th>
+            <td><input type="text" name="charge" style="width:90%;height:30px" value="<?php echo($charge) ?>"></td>
+        </tr>
+        <tr>
+            <th>チャージURL</th>
+            <td><input type="text" name="charge_id" style="width:90%;height:30px" value="<?php echo($charge_id) ?>"></td>
+        </tr>
+        <tr>
+            <th>延長料金</th>
+            <td><input type="text" name="extension_fee" style="width:90%;height:30px" value="<?php echo($extension_fee) ?>"></td>
+        </tr>
+        <tr>
+            <th>延長料金URL</th>
+            <td><input type="text" name="extension_fee_id" style="width:90%;height:30px" value="<?php echo($extension_fee_id) ?>"></td>
+        </tr>
+        <tr>
+            <th>ZoomURL<span id="zoom_url"><br>(非公開)</span></th>
+            <td><input type="text" name="zoom_url" style="width:90%;height:30px" value="<?php echo($zoom_url) ?>"></td>
+        </tr>
+        <tr id="address">
+            <th>住所</th>
+            <td><textarea name="address" cols="30" rows="3" style="width:90%;"><?php echo($address) ?></textarea></td>
+        </tr>
+    </table>    
+    <p><input class="btn" type="submit" value="保存"></p>
+    <input type="hidden" name="recaptchaResponse" id="recaptchaResponse">
+</form>
+<div id="img">
+<h3>画像登録</h3>
+    <form action="signup.html?id=<?php echo($id) ?>&pw=<?php echo(hash("sha256", $id.$solt))?>" enctype="multipart/form-data" method="post">
+        <p><label>画像アップロード</label>
+        <input type="file" name="upfile">
+        <br>
+        ※画像はjpeg方式，png方式，gif方式に対応しています。<br>
+        　画像サイズは1メガまでとしてください。
+        <div style="display: none;">
+            <br>
+            サムネイル
+            <input type="radio" name="tn" value="t"">はい　<input type="radio" name="tn" value="" checked="checked"">いいえ<br>
+        </div>
+        </p>
+        <p><input class="btn" type="submit" value="アップロード"></p>
+    </form>
+</div>
+</section>
+
+
+<section>
+<h2>表示イメージ</h2>
+<h3>サムネイル</h3>
+
+<div class="list up">
+<a href="staff.html?id=<?php echo($id) ?>">
+<figure><div class="bg" style="background-image: url(import_media.php?target=<?php echo($target) ?>);" alt="sample name"></div></figure>
+<!-- <figure><img src="import_media.php?target=<?php echo($target) ?>" alt="<?php echo($name) ?>"></figure> -->
+<h4><?php echo($name) ?></h4>
+<p><?php echo($comment_small) ?></p>
+<span class="mark1">人気</span>
+</a>
+</div>
+
+<h3>紹介ページ</h3>
+
+<?php include('staff.php');?>
+
+</section>
+
+</div>
+<!--/#main-->
+
+<div id="sub">
+
+<nav class="box1">
+<h2>Contents</h2>
+<ul class="submenu">
+<li><a href="company.html">会社概要</a></li>
+<li><a href="link.html">リンク</a></li>
+<li><a href="contact.html">お問い合わせ</a></li>
+<li><a href="#">メニューサンプル</a></li>
+<li><a href="#">メニューサンプル</a></li>
+</ul>
+</nav>
+
+<nav class="box1">
+<ul class="submenu">
+<li><a href="#">メニューサンプル</a></li>
+<li><a href="#">メニューサンプル</a></li>
+<li><a href="#">メニューサンプル</a></li>
+<li><a href="#">メニューサンプル</a></li>
+<li><a href="#">メニューサンプル</a></li>
+</ul>
+</nav>
+
+<section>
+
+<h2>人気キャスト</h2>
+
+<div class="list-sub">
+<a href="staff.html">
+<figure><img src="images/photo1.png" alt=""></figure>
+<h4>sample name</h4>
+<p>簡単な説明を入れます。</p>
+</a>
+</div>
+
+<div class="list-sub">
+<a href="staff.html">
+<figure><img src="images/photo1.png" alt=""></figure>
+<h4>sample name</h4>
+<p>簡単な説明を入れます。</p>
+</a>
+</div>
+
+<div class="list-sub">
+<a href="staff.html">
+<figure><img src="images/photo1.png" alt=""></figure>
+<h4>sample name</h4>
+<p>簡単な説明を入れます。</p>
+</a>
+</div>
+
+<div class="list-sub">
+<a href="staff.html">
+<figure><img src="images/photo1.png" alt=""></figure>
+<h4>sample name</h4>
+<p>簡単な説明を入れます。</p>
+</a>
+</div>
+
+</section>
+
+<div class="box1 c">
+<h2 class="mb10">アクセス</h2>
+<p>東京都XX区XXXXビル３F<br>
+TEL：03-0000-0000<br>
+定休日：月曜日</p>
+</div>
+
+<p>
+<a href="recruit.html"><img src="!gnore/enter/banner1.jpg" alt="キャスト募集中" class="pc border1"></a>
+<a href="recruit.html"><img src="!gnore/enter/banner1_sh.jpg" alt="キャスト募集中" class="sh border1"></a>
+</p>
+<p>上のバナー画像は、901px以上の端末と900px以下とで画像２種類が切り替わります。<br>
+<a href="company.html#banner">詳しい説明はこちら。</a></p>
+
+</div>
+<!--/#sub-->
+
+</div>
+<!--/#contents-->
+
+<footer>
+<small>Copyright&copy; <a href="index.html">Sample Club</a> All Rights Reserved.</small>
+<span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
+</footer>
+
+<!--ページの上部へボタン-->
+<p class="nav-fix-pos-pagetop"><a href="#">↑</a></p>
+
+<!--メニュー開閉ボタン-->
+<div id="menubar_hdr" class="close"></div>
+
+<!--メニューの開閉処理条件設定　900px以下-->
+<script>
+if (OCwindowWidth() <= 900) {
+	open_close("menubar_hdr", "menubar-s");
+}
+</script>
+<!--パララックス用ファイル読み込み-->
+<script src="js/jquery.inview.js"></script>
+<script src="js/jquery.inview_set.js"></script>
+
+</body>
+</html>

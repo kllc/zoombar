@@ -1,0 +1,160 @@
+<?php include('header.php');?>
+<?php include('mysql.php');?>
+<?php $id = $_GET['id']; ?>
+<?php include('select.php');?>
+
+<script>
+$(()=>{
+    $('#reservation').submit(()=>{
+        if($('input[name="email"]').val()==''||$('input[name="name"]').val()==''){
+            alert('お名前,Ｅメールは必須入力です');
+            return false;
+        }
+    });
+});
+</script>
+
+<div id="contents" class="inner">
+<div id="main">
+
+<section>
+
+<h2>ご予約</h2>
+<form id="reservation" action="reservation.html?id=<?php echo($id) ?>" enctype="multipart/form-data" method="post">
+    <table class="ta1">
+        <tr>
+            <th>
+                <?php
+                    if ($kubun == 'b'){
+                        echo('予約店舗');
+                    } else{
+                        echo('担当者');
+                    }
+                ?>
+            </th>
+            <td><?php echo($name) ?></td>
+        </tr>
+        <tr>
+            <th>お名前</th>
+            <td><input type="text" name="name" style="width:90%;height:30px"></td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td><input type="text" name="email" style="width:90%;height:30px"></td>
+        </tr>
+        <tr>
+            <th>コメント</th>
+            <td>例）本日１９時からいけますか？<textarea name="comment" cols="30" rows="10" style="width:90%;"></textarea></td>
+        </tr>
+    </table>    
+    <p><input class="btn" type="submit" value="送信"></p>
+</form>
+</section>
+
+</div>
+<!--/#main-->
+
+<div id="sub">
+
+<nav class="box1">
+<h2>Contents</h2>
+<ul class="submenu">
+<li><a href="company.html">会社概要</a></li>
+<li><a href="link.html">リンク</a></li>
+<li><a href="contact.html">お問い合わせ</a></li>
+<li><a href="#">メニューサンプル</a></li>
+<li><a href="#">メニューサンプル</a></li>
+</ul>
+</nav>
+
+<nav class="box1">
+<ul class="submenu">
+<li><a href="#">メニューサンプル</a></li>
+<li><a href="#">メニューサンプル</a></li>
+<li><a href="#">メニューサンプル</a></li>
+<li><a href="#">メニューサンプル</a></li>
+<li><a href="#">メニューサンプル</a></li>
+</ul>
+</nav>
+
+<section>
+
+<h2>人気キャスト</h2>
+
+<div class="list-sub">
+<a href="staff.html">
+<figure><img src="images/photo1.png" alt=""></figure>
+<h4>sample name</h4>
+<p>簡単な説明を入れます。</p>
+</a>
+</div>
+
+<div class="list-sub">
+<a href="staff.html">
+<figure><img src="images/photo1.png" alt=""></figure>
+<h4>sample name</h4>
+<p>簡単な説明を入れます。</p>
+</a>
+</div>
+
+<div class="list-sub">
+<a href="staff.html">
+<figure><img src="images/photo1.png" alt=""></figure>
+<h4>sample name</h4>
+<p>簡単な説明を入れます。</p>
+</a>
+</div>
+
+<div class="list-sub">
+<a href="staff.html">
+<figure><img src="images/photo1.png" alt=""></figure>
+<h4>sample name</h4>
+<p>簡単な説明を入れます。</p>
+</a>
+</div>
+
+</section>
+
+<div class="box1 c">
+<h2 class="mb10">アクセス</h2>
+<p>東京都XX区XXXXビル３F<br>
+TEL：03-0000-0000<br>
+定休日：月曜日</p>
+</div>
+
+<p>
+<a href="recruit.html"><img src="!gnore/enter/banner1.jpg" alt="キャスト募集中" class="pc border1"></a>
+<a href="recruit.html"><img src="!gnore/enter/banner1_sh.jpg" alt="キャスト募集中" class="sh border1"></a>
+</p>
+<p>上のバナー画像は、901px以上の端末と900px以下とで画像２種類が切り替わります。<br>
+<a href="company.html#banner">詳しい説明はこちら。</a></p>
+
+</div>
+<!--/#sub-->
+
+</div>
+<!--/#contents-->
+
+<footer>
+<small>Copyright&copy; <a href="index.html">Sample Club</a> All Rights Reserved.</small>
+<span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
+</footer>
+
+<!--ページの上部へボタン-->
+<p class="nav-fix-pos-pagetop"><a href="#">↑</a></p>
+
+<!--メニュー開閉ボタン-->
+<div id="menubar_hdr" class="close"></div>
+
+<!--メニューの開閉処理条件設定　900px以下-->
+<script>
+if (OCwindowWidth() <= 900) {
+	open_close("menubar_hdr", "menubar-s");
+}
+</script>
+<!--パララックス用ファイル読み込み-->
+<script src="js/jquery.inview.js"></script>
+<script src="js/jquery.inview_set.js"></script>
+
+</body>
+</html>

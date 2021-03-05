@@ -1,0 +1,10 @@
+# さくらの設定
+# Action myphp-script /php.cgi
+# AddHandler myphp-script .php .html
+
+# Dockerの設定
+Options +MultiViews
+AddType text/html .php
+<FilesMatch "(\.html$)">
+  AddType application/x-httpd-php .html
+</FilesMatch>

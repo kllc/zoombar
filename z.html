@@ -1,0 +1,201 @@
+<?php include('mysql.php');?>
+<?php if(isset($_GET['id'])) { $id = $_GET['id'];} ?>
+<?php include('select.php');?>
+<?php include('header.php');?>
+<?php include('staff-post.php');?>
+
+<div id="contents" class="inner">
+<div id="main">
+
+<article>
+
+<section>
+<h2><?php echo($name) ?></h2>
+<?php include('staff.php');?>
+<a id="fix_btn" class="js-modal-open" href="#">ご予約</a>
+
+<script>
+$(()=>{
+	// $('#fix_btn').attr('href', $(location).attr('href'));
+	$('#facebook').attr('href', 'http://www.facebook.com/share.php?u='+ $(location).attr('href'));
+	$('#line').attr('data-url', $(location).attr('href'));
+	$('.js-modal-open').on('click',function(){
+        $('.js-modal').fadeIn();
+        return false;
+    });
+    $('.js-modal-close').on('click',function(){
+        $('.js-modal').fadeOut();
+        return false;
+	});
+	$('#reservation').submit(()=>{
+        if($('input[name="email"]').val()==''||$('input[name="name"]').val()==''){
+            alert('お客様名,Emailは必須入力です');
+            return false;
+		} else {
+			alert('送信しました');
+			open_close("menubar_hdr", "menubar-s");
+		}
+    });
+})
+</script>
+
+<!-- <p class="clear c">
+<a href="#"><input type="submit" value="簡易予約フォームへ" class="btn"></a><br>
+※簡易予約フォームは<a href="https://template-party.com/staff_program/">スタッフCMS</a>に備わったシステムです。
+</p> -->
+<div class="clear" style="height:auto;float:right;">
+	<!-- <a id="line" rel="nofollow" target="_blank"><i style="background-color: white;color:#00B900; font-size: 1.2em; padding: 1px 8px 1px 8px;" class="fab fa-line"></i></a> -->
+	<div id="line" class="line-it-button" data-lang="ja" data-type="share-b" data-ver="3" data-url="https://social-plugins.line.me/ja/how_to_install#lineitbutton" data-color="default" data-size="small" data-count="false" style="display: none;"></div>&nbsp;
+	<script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
+	<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false"><i style="background-color:#00acee;color:white; font-size: 1.2em;padding: 1px 8px 1px 8px;" class="fab fa-twitter"></i></a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>&nbsp;
+	<a id="facebook" rel="nofollow" target="_blank"><i style="background-color:#3B5998;color: white; font-size: 1.2em; padding: 4px 8px 0px 14px;" class="fab fa-facebook-f"></i></a>
+</div>
+<br class="clear">
+<p class="c">&lt;&lt; <a href="javascript:history.back()">前のページに戻る</a></p>
+
+</div>
+<!--/staff-->
+
+</article>
+
+</div>
+<!--/#main-->
+
+<div id="sub">
+
+<nav class="box1">
+<h2>Contents</h2>
+<ul class="submenu">
+<li><a href="company.html">会社概要</a></li>
+<li><a href="link.html">リンク</a></li>
+<li><a href="contact.html">お問い合わせ</a></li>
+<li><a href="#">メニューサンプル</a></li>
+<li><a href="#">メニューサンプル</a></li>
+</ul>
+</nav>
+
+<nav class="box1">
+<ul class="submenu">
+<li><a href="#">メニューサンプル</a></li>
+<li><a href="#">メニューサンプル</a></li>
+<li><a href="#">メニューサンプル</a></li>
+<li><a href="#">メニューサンプル</a></li>
+<li><a href="#">メニューサンプル</a></li>
+</ul>
+</nav>
+
+<section>
+
+<h2>人気キャスト</h2>
+
+<div class="list-sub">
+<a href="staff.html">
+<figure><img src="images/photo1.png" alt=""></figure>
+<h4>sample name</h4>
+<p>簡単な説明を入れます。</p>
+</a>
+</div>
+
+<div class="list-sub">
+<a href="staff.html">
+<figure><img src="images/photo1.png" alt=""></figure>
+<h4>sample name</h4>
+<p>簡単な説明を入れます。</p>
+</a>
+</div>
+
+<div class="list-sub">
+<a href="staff.html">
+<figure><img src="images/photo1.png" alt=""></figure>
+<h4>sample name</h4>
+<p>簡単な説明を入れます。</p>
+</a>
+</div>
+
+<div class="list-sub">
+<a href="staff.html">
+<figure><img src="images/photo1.png" alt=""></figure>
+<h4>sample name</h4>
+<p>簡単な説明を入れます。</p>
+</a>
+</div>
+
+</section>
+
+<div class="box1 c">
+<h2 class="mb10">アクセス</h2>
+<p>東京都XX区XXXXビル３F<br>
+TEL：03-0000-0000<br>
+定休日：月曜日</p>
+</div>
+
+<p>
+<a href="signup.html"><img src="!gnore/enter/banner1.jpg" alt="キャスト募集中" class="pc border1"></a>
+<a href="signup.html"><img src="!gnore/enter/banner1_sh.jpg" alt="キャスト募集中" class="sh border1"></a>
+</p>
+<p>上のバナー画像は、901px以上の端末と900px以下とで画像２種類が切り替わります。<br>
+<a href="company.html#banner">詳しい説明はこちら。</a></p>
+
+</div>
+<!--/#sub-->
+
+</div>
+<!--/#contents-->
+
+<footer>
+<small>Copyright&copy; <a href="index.html">Sample Club</a> All Rights Reserved.</small>
+<span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
+</footer>
+
+<!--ページの上部へボタン-->
+<p class="nav-fix-pos-pagetop"><a href="#">↑</a></p>
+
+<!--メニュー開閉ボタン-->
+<div id="menubar_hdr" class="close"></div>
+
+<div class="modal js-modal">
+	<div class="modal__bg js-modal-close"></div>
+	<div class="modal__content">
+
+		<form id="reservation" action="staff.html?id=<?php echo($id) ?>" enctype="multipart/form-data" method="post">
+			<table class="ta1">
+				<tr>
+					<th>
+						<?php
+							if ($kubun == 'b'){
+								echo('予約店舗');
+							} else{
+								echo('メンバー');
+							}
+						?>
+					</th>
+					<td><?php echo($name) ?></td>
+				</tr>
+				<tr>
+					<th>お客様名</th>
+					<td><input type="text" name="name" style="width:90%;height:30px"></td>
+				</tr>
+				<tr>
+					<th>Email</th>
+					<td><input type="text" name="email" style="width:90%;height:30px"></td>
+				</tr>
+				<tr>
+					<th>コメント</th>
+					<td>例）19時からいけますか？<textarea name="comment" cols="30" rows="5" style="width:90%;"></textarea></td>
+				</tr>
+			</table>    
+			<p><input class="btn" type="submit" value="送信">
+			<input class="btn js-modal-close" type="submit" value="閉じる"></p>
+		</form>
+	</div><!--modal__inner-->
+</div><!--modal-->
+
+<!--メニューの開閉処理条件設定　900px以下-->
+<script>
+if (OCwindowWidth() <= 900) {
+	open_close("menubar_hdr", "menubar-s");
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,200 @@
+<?php include('header.php');?>
+<?php include('mysql.php');?>
+
+<!--スライドショー-->
+<aside id="mainimg" class="inner">
+<img src="images/1.jpg" alt="" class="slide0">
+<img src="images/1.jpg" alt="" class="slide1">
+<img src="images/2.jpg" alt="" class="slide2">
+<img src="images/3.jpg" alt="" class="slide3">
+</aside>
+
+<div id="contents" class="inner">
+
+<div id="main">
+
+<section>
+<h2>Pick Up Bar & Member</h2>
+
+<?php
+    //DBから取得して表示する．
+
+	$sql = "SELECT *, mem.id AS memid FROM `member` AS mem LEFT JOIN ( ";
+	$sql = $sql."SELECT m1.* FROM ";
+	$sql = $sql."(SELECT * FROM `media` ORDER BY `number`) AS m1, ";
+	$sql = $sql."(SELECT id,max(`number`) AS num FROM `media` GROUP BY id) AS m2 ";
+	$sql = $sql."WHERE m1.`number` = m2.num ";
+	$sql = $sql.") AS med ON mem.id = med.id WHERE rank > 0 ORDER BY rank DESC limit 8";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt -> execute();
+?>
+<?php include('tm.php');?>
+
+
+<!-- <div class="list up">
+<a href="staff.html">
+<figure><img src="images/photo1.png" alt="sample name"></figure>
+<h4>sample name</h4>
+<p>簡単な説明を入れます。画像の縦横比は全て統一して下さい。</p>
+<span class="mark1">人気</span>
+</a>
+</div> -->
+
+<!-- <div class="list up">
+<a href="staff.html">
+<figure><img src="images/photo1.png" alt="sample name"></figure>
+<h4>sample name</h4>
+<p>簡単な説明を入れます。画像の縦横比は全て統一して下さい。</p>
+<span class="mark2">NEW</span>
+</a>
+</div>
+
+<div class="list up">
+<a href="staff.html">
+<figure><img src="images/photo1.png" alt="sample name"></figure>
+<h4>sample name</h4>
+<p>簡単な説明を入れます。画像の縦横比は全て統一して下さい。</p>
+</a>
+</div> -->
+
+<!-- <div class="list up">
+<a href="staff.html">
+<figure><img src="images/noimg.png" alt="sample name"></figure>
+<h4>sample name</h4>
+<p>文字をつめこみすぎるとボックスから飛び出た部分が非表示になります(※小さな端末の環境で)。余裕をもって入力して下さい。</p>
+</a>
+</div> -->
+
+</section>
+
+<section>
+	<h2>Zoom Bar Information</h2>
+	<h3>オンラインバーの登録サイトです</h3>
+	<p>オンライン飲み会、もう一軒いかがですか？　なじみの店、新しい店、イベント、出会いなど、オンラインバーを楽しんでください。</p>
+	<p>料金はテーブルチャージのみです。
+	詳しくは「 <a href="system.html" target="_blank">システム</a> 」をご覧下さい。</p>
+	<h3>Zoom Bar は飲食店を支援致します</h3>
+	<p>本サイトは、<strong class="color1">無料で登録できます。</strong></p>
+</section>
+	
+
+<section id="new">
+<h2>更新情報・お知らせ</h2>
+<dl>
+<dt>20/4/7</dt>
+<dd>緊急事態宣言の期間中と、解除後当面の間はサイトへの新規登録が無料です。<span class="newicon">NEW</span></dd>
+<dt>20/4/1</dt>
+<dd>サイトオープンしました。</dd>
+</dl>
+<!-- <p class="r">&raquo;&nbsp;<a href="#">過去ログ</a></p> -->
+</section>
+
+</div>
+<!--/#main-->
+
+<div id="sub">
+
+<nav class="box1">
+<h2>Contents</h2>
+<ul class="submenu">
+<li><a href="company.html">会社概要</a></li>
+<li><a href="link.html">リンク</a></li>
+<li><a href="contact.html">お問い合わせ</a></li>
+<li><a href="#">メニューサンプル</a></li>
+<li><a href="#">メニューサンプル</a></li>
+</ul>
+</nav>
+
+<nav class="box1">
+<ul class="submenu">
+<li><a href="#">メニューサンプル</a></li>
+<li><a href="#">メニューサンプル</a></li>
+<li><a href="#">メニューサンプル</a></li>
+<li><a href="#">メニューサンプル</a></li>
+<li><a href="#">メニューサンプル</a></li>
+</ul>
+</nav>
+
+<section>
+
+<h2>人気キャスト</h2>
+
+<div class="list-sub">
+<a href="staff.html">
+<figure><img src="images/photo1.png" alt=""></figure>
+<h4>sample name</h4>
+<p>簡単な説明を入れます。</p>
+</a>
+</div>
+
+<div class="list-sub">
+<a href="staff.html">
+<figure><img src="images/photo1.png" alt=""></figure>
+<h4>sample name</h4>
+<p>簡単な説明を入れます。</p>
+</a>
+</div>
+
+<div class="list-sub">
+<a href="staff.html">
+<figure><img src="images/photo1.png" alt=""></figure>
+<h4>sample name</h4>
+<p>簡単な説明を入れます。</p>
+</a>
+</div>
+
+<div class="list-sub">
+<a href="staff.html">
+<figure><img src="images/photo1.png" alt=""></figure>
+<h4>sample name</h4>
+<p>簡単な説明を入れます。</p>
+</a>
+</div>
+
+</section>
+
+<div class="box1 c">
+<h2 class="mb10">アクセス</h2>
+<p>東京都XX区XXXXビル３F<br>
+TEL：03-0000-0000<br>
+定休日：月曜日</p>
+</div>
+
+<p>
+<a href="signup.html"><img src="!gnore/enter/banner1.jpg" alt="キャスト募集中" class="pc border1"></a>
+<a href="signup.html"><img src="!gnore/enter/banner1_sh.jpg" alt="キャスト募集中" class="sh border1"></a>
+</p>
+<p>上のバナー画像は、901px以上の端末と900px以下とで画像２種類が切り替わります。<br>
+<a href="company.html#banner">詳しい説明はこちら。</a></p>
+
+</div>
+<!--/#sub-->
+
+</div>
+<!--/#contents-->
+
+<footer>
+<small>お問い合わせ：<a href="mailto:info@zoombar.net">info@zoombar.net</a></small>
+<span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
+</footer>
+
+<!--ページの上部へボタン-->
+<p class="nav-fix-pos-pagetop"><a href="#">↑</a></p>
+
+<!--メニュー開閉ボタン-->
+<div id="menubar_hdr" class="close"></div>
+
+<!--メニューの開閉処理条件設定　900px以下-->
+<script>
+if (OCwindowWidth() <= 900) {
+	open_close("menubar_hdr", "menubar-s");
+}
+</script>
+
+<!--パララックス用ファイル読み込み-->
+<script src="js/jquery.inview.js"></script>
+<script src="js/jquery.inview_set.js"></script>
+
+</body>
+</html>
