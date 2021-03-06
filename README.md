@@ -29,3 +29,8 @@ CREATE TABLE.sql に書かれている２つのCREATE文を実行
 ### 実行（開発環境）
 Visual Studio で Go Live ボタンを押下
 
+### 本番環境との違い
+- DBが本番と違います。mysql.php を開発用に設定しています。
+- reCAPTCHA （SPAM防止）が動きません。
+- メール送信も動きません。登録データは以下から確認してください。
+http://127.0.0.1:5500/admin.html
