@@ -7,8 +7,6 @@ CREATE TABLE
 `raw_data` LONGBLOB NOT NULL,
 KEY (`number`)) ENGINE = InnoDB;
 
-
-
 CREATE TABLE 
 `member` (
 `id` CHAR(64) CHARACTER SET utf8 COLLATE utf8_general_ci  NOT NULL, 
