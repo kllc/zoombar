@@ -8,7 +8,9 @@
 以下インストール必要
 - Visual Studio Code と git (https://taccuma.com/install-vscode-and-git-in-win10/)<br>
 - Docker  (https://qiita.com/zaki-lknr/items/db99909ba1eb27803456)<br>
-- Live Server (https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+- Live Server (https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)<br>
+
+以下、VS Code のターミナルで実行
 
 ### ソースダウンロード
 `git clone https://github.com/kllc/zoombar.git`
